@@ -21,6 +21,7 @@ class Opcodes(Enum):
     NOT = '10'
     GET = '11'
     LOCKR = '12'
+    PUSHRTS = '13'
     IGl = 'igl'
 
 
