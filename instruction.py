@@ -4,6 +4,10 @@ import binascii
 import verify
 from enum import Enum
 
+import logging
+
+log = logging.getLogger("logger")
+log.setLevel(logging.DEBUG)
 
 class MessageType(Enum):
     InstructionWarning = 0
@@ -53,9 +57,9 @@ class File:
         for content_line in content_lines:
 
             content_line_raw_instruction = content_line.split(' ')
-            print(content_line_raw_instruction)
+            log.info(content_line_raw_instruction)
             if len(content_line_raw_instruction) < 4:
-                print("Error: instruction over/under 4 parts line:", line)
+                log.error("Error: instruction over/under 4 parts line:", line)
             if content_line_raw_instruction[0] == '':
                 continue
 
@@ -71,11 +75,11 @@ class File:
 
             message_type, message = check(temp_instruction)
             if message_type == MessageType.InstructionError:
-                print("Error:", message, "Line", line)
+                log.error("Error:", message, "Line", line)
                 exit(4)
             elif message_type == MessageType.InstructionWarning:
-                print("Warning:", message, "Line:", line)
+                log.warning("Warning:", message, "Line:", line)
             else:
-                print("Done Line:", line)
+                log.info("Done Line:", line)
                 self.bin.append(get_hex(temp_instruction))
             line = line + 1
