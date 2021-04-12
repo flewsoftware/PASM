@@ -1,0 +1,18 @@
+# this demo will print 0..inf
+
+LOAD 09 00 01 # 1 value
+LOAD 10 00 09 # 1 value pointer
+
+LOAD 03 00 08 # jmp location
+LOAD 04 00 03 # jmp location pointer
+
+LOAD 11 00 01 # println option
+LOAD 12 00 11 # println option pointer
+
+LOAD 01 00 01 # data
+LOAD 02 00 01 # data pointer
+
+ADD 02 10 02
+VMCALL 1F 12 02 # print data
+
+JMP 04 1F 1F # jmp to ADD instruction
