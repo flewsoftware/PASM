@@ -1,3 +1,0 @@
-LOAD 01 01 01 # data
-LOAD 02 00 01 # data pointer
-VMCALL 1F 1F 02 # print data
