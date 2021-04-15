@@ -23,6 +23,7 @@ class Opcodes(Enum):
     LOCKR = '12'
     PUSHRTS = '13'
     POPRFS = '14'
+    BREAK = '15'
     IGl = 'igl'
 
 
