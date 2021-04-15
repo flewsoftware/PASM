@@ -1,4 +1,4 @@
-<sup>Perling VM is part of the Perling project</sup>
+<sup>**PASM** is part of the Perling project</sup>
 
 # What is PASM
 PASM which stands for Perling Assembly Language is a currently work in progress program execution platform's assembly language that dirrectly translates to Perling binary.
