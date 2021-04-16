@@ -24,6 +24,8 @@ class Opcodes(Enum):
     PUSHRTS = '13'
     POPRFS = '14'
     BREAK = '15'
+    LABEL = '16'
+    GOTO = '17'
     IGl = 'igl'
 
 
