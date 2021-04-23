@@ -9,6 +9,7 @@ import logging
 log = logging.getLogger("logger")
 log.setLevel(logging.DEBUG)
 
+
 class MessageType(Enum):
     InstructionWarning = 0
     InstructionError = 1
@@ -28,7 +29,7 @@ class Instruction:
             correct_placeholders = verify.is_correct_empty_placeholder(self)
             if correct_placeholders != 0:
                 return MessageType.InstructionWarning, 'arg:' + str(correct_placeholders) + \
-                       ' 0x1F not used as placeholder for unneeded argument'
+                    ' 0x1F not used as placeholder for unneeded argument'
         elif self.opcode == Opcodes.LOAD:
             if self.arg1 == '1F' and not self.special:
                 return MessageType.InstructionError, 'arg: 1 trying to LOAD value to 0x1F register is illegal'
@@ -37,9 +38,9 @@ class Instruction:
 
     def __get_compiled__(self):
         return binascii.unhexlify(''.join(str(self.opcode.value))) \
-               + binascii.unhexlify(''.join(self.arg1)) \
-               + binascii.unhexlify(''.join(self.arg2)) \
-               + binascii.unhexlify(''.join(self.arg3))
+            + binascii.unhexlify(''.join(self.arg1)) \
+            + binascii.unhexlify(''.join(self.arg2)) \
+            + binascii.unhexlify(''.join(self.arg3))
 
 
 load_zero_instruction = Instruction(Opcodes.LOAD, '1F', '00', '00', True)
@@ -58,12 +59,14 @@ class File:
 
             content_line_raw_instruction = content_line.split(' ')
             log.info(content_line_raw_instruction)
-            if len(content_line_raw_instruction) < 4:
-                log.error("Error: instruction over/under 4 parts line:", line)
+
             if content_line_raw_instruction[0] == '':
                 continue
+            elif len(content_line_raw_instruction) < 4:
+                log.error("Error: instruction over/under 4 parts line:", line)
 
-            content_line_instruction_opcode = get_opcode(content_line_raw_instruction[0])
+            content_line_instruction_opcode = get_opcode(
+                content_line_raw_instruction[0])
             content_line_instruction_arg1 = content_line_raw_instruction[1]
             content_line_instruction_arg2 = content_line_raw_instruction[2]
             content_line_instruction_arg3 = content_line_raw_instruction[3]
